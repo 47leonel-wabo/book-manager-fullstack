@@ -1,4 +1,4 @@
-package com.assa.bookdatabase.books.domain;
+package com.assa.bookdatabase.books.domain.user;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

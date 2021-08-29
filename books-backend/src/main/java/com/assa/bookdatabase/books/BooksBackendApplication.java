@@ -1,6 +1,8 @@
 package com.assa.bookdatabase.books;
 
 import com.assa.bookdatabase.books.domain.*;
+import com.assa.bookdatabase.books.domain.user.AppUser;
+import com.assa.bookdatabase.books.domain.user.AppUserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;

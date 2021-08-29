@@ -1,7 +1,7 @@
 package com.assa.bookdatabase.books.security.service;
 
-import com.assa.bookdatabase.books.domain.AppUser;
-import com.assa.bookdatabase.books.domain.AppUserRepository;
+import com.assa.bookdatabase.books.domain.user.AppUser;
+import com.assa.bookdatabase.books.domain.user.AppUserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.authority.AuthorityUtils;

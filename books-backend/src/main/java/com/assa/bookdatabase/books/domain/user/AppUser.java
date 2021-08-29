@@ -1,5 +1,6 @@
-package com.assa.bookdatabase.books.domain;
+package com.assa.bookdatabase.books.domain.user;
 
+import com.assa.bookdatabase.books.domain.UserRole;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
