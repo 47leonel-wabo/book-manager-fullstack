@@ -14,4 +14,6 @@ public interface BookRepository extends JpaRepository<Book, Long> {
 
     List<Book> findByPrice(final BigDecimal price);
 
+    List<Book> findByAuthor(final Author author);
+
 }
