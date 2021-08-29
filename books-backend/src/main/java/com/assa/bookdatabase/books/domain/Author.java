@@ -3,10 +3,8 @@ package com.assa.bookdatabase.books.domain;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -22,6 +20,9 @@ public class Author {
     private String firstName, lastName;
 
     private Integer age;
+
+    @OneToMany(mappedBy = "author", cascade = CascadeType.ALL)
+    private List<Book> books;
 
     public Author(String firstName, String lastName, Integer age) {
         this.firstName = firstName;
