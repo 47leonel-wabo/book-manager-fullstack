@@ -1,9 +1,10 @@
 import "./App.css";
+import WeatherApp from "./WeatherApp";
 
 function App() {
     return (
         <div className="App">
-            <h3>Book Management</h3>
+            <WeatherApp />
         </div>
     );
 }
