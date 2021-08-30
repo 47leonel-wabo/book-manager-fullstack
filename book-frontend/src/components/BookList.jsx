@@ -33,16 +33,15 @@ const BookList = (props) => {
 
     // POST
     const addBook = (book) => {
-        console.log(book);
-        // fetch(CONSTANT.SERVER_URL.concat("/api/books"), {
-        //     method: "POST",
-        //     headers: {
-        //         "Content-Type": "application/json",
-        //     },
-        //     body: JSON.stringify(book),
-        // })
-        //     .then((response) => fetchBookData())
-        //     .catch((error) => console.error(error));
+        fetch(CONSTANT.SERVER_URL.concat("/api/books"), {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(book),
+        })
+            .then((response) => fetchBookData())
+            .catch((error) => console.error(error));
     };
 
     useMemo(() => {
