@@ -3,8 +3,22 @@ import { useMemo, useState } from "react";
 import { useTable } from "react-table";
 import * as CONSTANT from "../constant";
 
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 const BookList = (props) => {
     const [books, setBooks] = useState([]);
+
+    const notify = () =>
+        toast.success("Book deleted successfully!", {
+            position: "top-center",
+            autoClose: 5000,
+            hideProgressBar: true,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+        });
 
     const fetchBookData = () => {
         fetch(CONSTANT.SERVER_URL.concat("/api/books"))
@@ -20,9 +34,19 @@ const BookList = (props) => {
     }, []);
 
     const handleDeletion = (link) => {
-        fetch(link, { method: "DELETE" })
-            .then((response) => fetchBookData())
-            .catch((error) => console.error(error));
+        if (window.confirm("Do you really want to delete?")) {
+            fetch(link, { method: "DELETE" })
+                .then((response) => {
+                    fetchBookData();
+                    notify();
+                })
+                .catch((error) => {
+                    toast.error("Error when deleting", {
+                        position: toast.POSITION.BOTTOM_RIGHT,
+                    });
+                    console.error(error);
+                });
+        }
     };
 
     const columns = React.useMemo(
@@ -102,6 +126,7 @@ const BookList = (props) => {
                     })}
                 </tbody>
             </table>
+            <ToastContainer />
         </>
     );
     // }
