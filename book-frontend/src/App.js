@@ -1,9 +1,10 @@
 import "./App.css";
+import SmallShop from "./SmallShop";
 
 function App() {
     return (
         <div className="App">
-            <h3>Book Management</h3>
+            <SmallShop />
         </div>
     );
 }
