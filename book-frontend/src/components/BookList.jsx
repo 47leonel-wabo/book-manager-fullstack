@@ -2,6 +2,7 @@ import React from "react";
 import { useMemo, useState } from "react";
 import { useTable } from "react-table";
 import * as CONSTANT from "../constant";
+import { Button } from "@material-ui/core";
 
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -97,9 +98,14 @@ const BookList = (props) => {
                 filterable: false,
                 accessor: "_links.self.href",
                 Cell: ({ value }) => (
-                    <button onClick={() => handleDeletion(value)}>
+                    <Button
+                        color="secondary"
+                        variant="contained"
+                        size="small"
+                        onClick={() => handleDeletion(value)}
+                    >
                         Delete
-                    </button>
+                    </Button>
                 ),
             },
         ],
