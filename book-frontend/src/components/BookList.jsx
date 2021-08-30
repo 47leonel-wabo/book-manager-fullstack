@@ -5,6 +5,7 @@ import * as CONSTANT from "../constant";
 
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import AddBook from "./AddBook";
 
 const BookList = (props) => {
     const [books, setBooks] = useState([]);
@@ -20,6 +21,7 @@ const BookList = (props) => {
             progress: undefined,
         });
 
+    // GET
     const fetchBookData = () => {
         fetch(CONSTANT.SERVER_URL.concat("/api/books"))
             .then((response) => response.json())
@@ -29,12 +31,27 @@ const BookList = (props) => {
             .catch((error) => console.error(error));
     };
 
+    // POST
+    const addBook = (book) => {
+        console.log(book);
+        // fetch(CONSTANT.SERVER_URL.concat("/api/books"), {
+        //     method: "POST",
+        //     headers: {
+        //         "Content-Type": "application/json",
+        //     },
+        //     body: JSON.stringify(book),
+        // })
+        //     .then((response) => fetchBookData())
+        //     .catch((error) => console.error(error));
+    };
+
     useMemo(() => {
         fetchBookData();
     }, []);
 
     const handleDeletion = (link) => {
         if (window.confirm("Do you really want to delete?")) {
+            // DELETE
             fetch(link, { method: "DELETE" })
                 .then((response) => {
                     fetchBookData();
@@ -97,6 +114,7 @@ const BookList = (props) => {
 
     return (
         <>
+            <AddBook handleSave={addBook} />
             <table {...getTableProps}>
                 <thead>
                     {headerGroups.map((hg) => (
