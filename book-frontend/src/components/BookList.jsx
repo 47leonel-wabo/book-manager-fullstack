@@ -1,4 +1,5 @@
 import React from "react";
+import * as CONSTANT from "../constant";
 
 class BookList extends React.Component {
     constructor(props) {
@@ -13,7 +14,7 @@ class BookList extends React.Component {
         this.setState({
             isLoading: true,
         });
-        fetch("http://localhost:8080/api/books")
+        fetch(CONSTANT.SERVER_URL.concat("/api/books"))
             .then((response) => response.json())
             .then((data) => {
                 this.setState({
