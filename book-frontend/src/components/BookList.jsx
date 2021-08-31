@@ -8,6 +8,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import AddBook from "./AddBook";
 import EditBook from "./EditBoot";
+import { CSVLink } from "react-csv";
 
 const BookList = (props) => {
     const [books, setBooks] = useState([]);
@@ -46,6 +47,7 @@ const BookList = (props) => {
             .catch((error) => console.error(error));
     };
 
+    // PUT
     const updateBook = (book, link) => {
         fetch(link, {
             method: "PUT",
@@ -156,6 +158,9 @@ const BookList = (props) => {
     return (
         <>
             <AddBook handleSave={addBook} />
+            <CSVLink data={books} separator=",">
+                Export CSV
+            </CSVLink>
             <table {...getTableProps}>
                 <thead>
                     {headerGroups.map((hg) => (
