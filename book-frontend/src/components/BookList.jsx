@@ -7,6 +7,7 @@ import { Button } from "@material-ui/core";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import AddBook from "./AddBook";
+import EditBook from "./EditBoot";
 
 const BookList = (props) => {
     const [books, setBooks] = useState([]);
@@ -43,6 +44,28 @@ const BookList = (props) => {
         })
             .then((response) => fetchBookData())
             .catch((error) => console.error(error));
+    };
+
+    const updateBook = (book, link) => {
+        fetch(link, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(book),
+        })
+            .then((response) => {
+                toast.success("Change saved", {
+                    position: toast.POSITION.TOP_CENTER,
+                });
+                fetchBookData();
+            })
+            .catch((error) => {
+                toast.error("An error occurred", {
+                    position: toast.POSITION.TOP_LEFT,
+                });
+                console.error(error);
+            });
     };
 
     useMemo(() => {
@@ -106,6 +129,19 @@ const BookList = (props) => {
                     >
                         Delete
                     </Button>
+                ),
+            },
+            {
+                sortable: false,
+                filterable: false,
+                accessor: "_links.self.href",
+                Cell: ({ value, row }) => (
+                    <EditBook
+                        selectedBook={row}
+                        link={value}
+                        updateBook={updateBook}
+                        fetchBooks={fetchBookData}
+                    />
                 ),
             },
         ],
