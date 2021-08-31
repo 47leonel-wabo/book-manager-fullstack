@@ -28,6 +28,12 @@ const Login = () => {
             body: JSON.stringify(user),
         })
             .then((response) => {
+                if (response.status) {
+                    toast.warn("Bad Credentials, Authentication Failed!", {
+                        position: toast.POSITION.TOP_LEFT,
+                        hideProgressBar: true,
+                    });
+                }
                 const jwtToken = response.headers.get("Authorization");
                 if (jwtToken !== null) {
                     sessionStorage.setItem("jwt", jwtToken);
@@ -113,7 +119,7 @@ const Login = () => {
                             </Button>
                         </Grid>
                     </Grid>
-                    <ToastContainer autoClose={500} />
+                    <ToastContainer autoClose={5000} />
                 </div>
             </>
         );
