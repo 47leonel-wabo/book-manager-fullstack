@@ -27,7 +27,14 @@ const BookList = (props) => {
 
     // GET
     const fetchBookData = () => {
-        fetch(CONSTANT.SERVER_URL.concat("/api/books"))
+        // First, get jwt token from user session
+        const token = sessionStorage.getItem("jwt");
+        // Then, this token to the header
+        fetch(CONSTANT.SERVER_URL.concat("/api/books"), {
+            headers: {
+                Authorization: token,
+            },
+        })
             .then((response) => response.json())
             .then((data) => {
                 setBooks(data._embedded.books);
@@ -37,10 +44,13 @@ const BookList = (props) => {
 
     // POST
     const addBook = (book) => {
+        // First, get jwt token from user session
+        const token = sessionStorage.getItem("jwt");
         fetch(CONSTANT.SERVER_URL.concat("/api/books"), {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
+                Authorization: token,
             },
             body: JSON.stringify(book),
         })
@@ -50,10 +60,13 @@ const BookList = (props) => {
 
     // PUT
     const updateBook = (book, link) => {
+        // First, get jwt token from user session
+        const token = sessionStorage.getItem("jwt");
         fetch(link, {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json",
+                Authorization: token,
             },
             body: JSON.stringify(book),
         })
@@ -78,7 +91,14 @@ const BookList = (props) => {
     // DELETE
     const handleDeletion = (link) => {
         if (window.confirm("Do you really want to delete?")) {
-            fetch(link, { method: "DELETE" })
+            // First, get jwt token from user session
+            const token = sessionStorage.getItem("jwt");
+            fetch(link, {
+                method: "DELETE",
+                headers: {
+                    Authorization: token,
+                },
+            })
                 .then((response) => {
                     fetchBookData();
                     notify();

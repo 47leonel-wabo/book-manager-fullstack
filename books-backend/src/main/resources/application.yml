@@ -4,3 +4,5 @@ spring:
   data:
     rest:
       base-path: /api
+server:
+  port: 9090
