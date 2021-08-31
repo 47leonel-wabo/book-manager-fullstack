@@ -17,9 +17,9 @@ Full stack project made for getting hands on practice on React and Spring Boot. 
 
 ![login](./screenshots/login.png)
 
-![books](/screenshots/data.png)
+![books](./screenshots/data.png)
 
-![new book](/screenshots/add.png)
+![new book](./screenshots/add.png)
 
 ## Credit
 
