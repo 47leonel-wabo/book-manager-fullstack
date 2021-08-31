@@ -2,13 +2,14 @@ import React from "react";
 import { useMemo, useState } from "react";
 import { useTable } from "react-table";
 import * as CONSTANT from "../constant";
-import { Button } from "@material-ui/core";
+import { Box, Button } from "@material-ui/core";
 
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import AddBook from "./AddBook";
 import EditBook from "./EditBoot";
 import { CSVLink } from "react-csv";
+import Grid from "@material-ui/core/Grid";
 
 const BookList = (props) => {
     const [books, setBooks] = useState([]);
@@ -74,9 +75,9 @@ const BookList = (props) => {
         fetchBookData();
     }, []);
 
+    // DELETE
     const handleDeletion = (link) => {
         if (window.confirm("Do you really want to delete?")) {
-            // DELETE
             fetch(link, { method: "DELETE" })
                 .then((response) => {
                     fetchBookData();
@@ -157,40 +158,86 @@ const BookList = (props) => {
 
     return (
         <>
-            <AddBook handleSave={addBook} />
-            <CSVLink data={books} separator=",">
-                Export CSV
-            </CSVLink>
-            <table {...getTableProps}>
-                <thead>
-                    {headerGroups.map((hg) => (
-                        <tr {...hg.getHeaderGroupProps()}>
-                            {hg.headers.map((column) => (
-                                <th {...column.getHeaderProps()}>
-                                    {column.render("Header")}
-                                </th>
-                            ))}
-                        </tr>
-                    ))}
-                </thead>
-                <tbody {...getTableBodyProps()}>
-                    {rows.map((row) => {
-                        prepareRow(row);
-                        return (
-                            <tr {...row.getRowProps()}>
-                                {row.cells.map((cell) => {
-                                    return (
-                                        <td {...cell.getCellProps()}>
-                                            {cell.render("Cell")}
-                                        </td>
-                                    );
-                                })}
-                            </tr>
-                        );
-                    })}
-                </tbody>
-            </table>
-            <ToastContainer />
+            <div
+                style={{
+                    backgroundColor: "transparent",
+                }}
+            >
+                <Grid
+                    style={{
+                        display: "flex",
+                        justifyContent: "center",
+                        marginTop: "16px",
+                        padding: "8px",
+                    }}
+                    container
+                    spacing={3}
+                >
+                    <Grid container item>
+                        <Grid item xs={6}>
+                            <AddBook handleSave={addBook} />
+                        </Grid>
+                        <Grid item xs={6}>
+                            <CSVLink data={books} separator=",">
+                                Export CSV
+                            </CSVLink>
+                        </Grid>
+                    </Grid>
+                    <Grid item xs={12} md={10} xl={8}>
+                        <Box
+                            sx={{
+                                border: "1px dashed grey",
+                                "&:hover": {
+                                    border: "2px solid grey",
+                                },
+                            }}
+                        >
+                            <table
+                                style={{
+                                    width: "100%",
+                                    padding: "8px",
+                                }}
+                                {...getTableProps}
+                            >
+                                <thead>
+                                    {headerGroups.map((hg) => (
+                                        <tr {...hg.getHeaderGroupProps()}>
+                                            {hg.headers.map((column) => (
+                                                <th
+                                                    {...column.getHeaderProps()}
+                                                >
+                                                    {column.render("Header")}
+                                                </th>
+                                            ))}
+                                        </tr>
+                                    ))}
+                                </thead>
+                                <tbody {...getTableBodyProps()}>
+                                    {rows.map((row) => {
+                                        prepareRow(row);
+                                        return (
+                                            <tr {...row.getRowProps()}>
+                                                {row.cells.map((cell) => {
+                                                    return (
+                                                        <td
+                                                            {...cell.getCellProps()}
+                                                        >
+                                                            {cell.render(
+                                                                "Cell"
+                                                            )}
+                                                        </td>
+                                                    );
+                                                })}
+                                            </tr>
+                                        );
+                                    })}
+                                </tbody>
+                            </table>
+                        </Box>
+                    </Grid>
+                    <ToastContainer />
+                </Grid>
+            </div>
         </>
     );
     // }

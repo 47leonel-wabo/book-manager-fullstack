@@ -41,7 +41,9 @@ const AddBook = ({ handleSave }) => {
     return (
         <>
             <div>
-                <button onClick={handleOpen}>Add book</button>
+                <Button variant="outlined" onClick={handleOpen}>
+                    Add book
+                </Button>
                 <Dialog open={isOpen} onClose={handleClose}>
                     <DialogTitle>
                         <Typography variant="h6" color="inherit">
@@ -50,6 +52,7 @@ const AddBook = ({ handleSave }) => {
                     </DialogTitle>
                     <DialogContent>
                         <TextField
+                            autoFocus
                             id="outline-basic"
                             variant="outlined"
                             size="small"

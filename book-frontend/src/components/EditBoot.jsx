@@ -69,6 +69,7 @@ const EditBook = ({ selectedBook, updateBook }) => {
                     </DialogTitle>
                     <DialogContent>
                         <TextField
+                            autoFocus
                             id="outline-basic"
                             variant="outlined"
                             size="small"
