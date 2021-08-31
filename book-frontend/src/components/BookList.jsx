@@ -188,7 +188,7 @@ const BookList = (props) => {
                             sx={{
                                 border: "1px dashed grey",
                                 "&:hover": {
-                                    border: "2px solid grey",
+                                    border: "2px dashed grey",
                                 },
                             }}
                         >
