@@ -3,6 +3,8 @@ import React from "react";
 import { useState } from "react";
 import * as CONSTANT from "../constant";
 import BookList from "./BookList";
+import "react-toastify/dist/ReactToastify.css";
+import { toast, ToastContainer } from "react-toastify";
 
 const Login = () => {
     const [user, setUser] = useState({
@@ -13,6 +15,11 @@ const Login = () => {
 
     const handleInputChange = (event) => {
         setUser({ ...user, [event.target.name]: event.target.value });
+    };
+
+    const handleLogout = () => {
+        sessionStorage.removeItem("jwt");
+        setIsAuthenticated(false);
     };
 
     const handleLogin = () => {
@@ -27,11 +34,32 @@ const Login = () => {
                     setIsAuthenticated(true);
                 }
             })
-            .catch((error) => console.error(error));
+            .catch((error) => {
+                toast.warn("Please check you Password and/or Username", {
+                    position: toast.POSITION.BOTTOM_LEFT,
+                    hideProgressBar: true,
+                });
+                console.error(error);
+            });
     };
 
     if (isAuthenticated === true) {
-        return <BookList />;
+        return (
+            <>
+                <Button
+                    style={{
+                        margin: "16px",
+                    }}
+                    variant="outlined"
+                    size="small"
+                    color="default"
+                    onClick={handleLogout}
+                >
+                    Logout
+                </Button>
+                <BookList />
+            </>
+        );
     } else {
         return (
             <>
@@ -62,7 +90,7 @@ const Login = () => {
                                 onChange={handleInputChange}
                             />
                         </Grid>
-                        <Grid item item xs={12}>
+                        <Grid item xs={12}>
                             <TextField
                                 variant="outlined"
                                 name="password"
@@ -73,7 +101,7 @@ const Login = () => {
                                 onChange={handleInputChange}
                             />
                         </Grid>
-                        <Grid item item xs={12}>
+                        <Grid item xs={12}>
                             <Button
                                 fullWidth
                                 variant="outlined"
@@ -85,6 +113,7 @@ const Login = () => {
                             </Button>
                         </Grid>
                     </Grid>
+                    <ToastContainer autoClose={500} />
                 </div>
             </>
         );
